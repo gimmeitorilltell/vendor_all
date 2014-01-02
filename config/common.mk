@@ -267,7 +267,13 @@ ifeq ($(candy5_BUILDTYPE), OFFICIAL)
     endif
 endif
 
-ifeq ($(candy5_BUILDTYPE), RELEASE)
+# HFM Files
+PRODUCT_COPY_FILES += \
+	vendor/cm/prebuilt/etc/hosts.alt:system/etc/hosts.alt \
+	vendor/cm/prebuilt/etc/hosts.og:system/etc/hosts.og
+
+ifeq ($(CM_BUILDTYPE), RELEASE)
+
     ifndef TARGET_VENDOR_RELEASE_BUILD_ID
         candy5_VERSION := $(PRODUCT_VERSION_MAJOR).$(PRODUCT_VERSION_MINOR).$(PRODUCT_VERSION_MAINTENANCE)$(PRODUCT_VERSION_DEVICE_SPECIFIC)-$(candy5_BUILD)
     else
