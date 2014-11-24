@@ -1,4 +1,6 @@
-PRODUCT_BRAND ?= candy5
+PRODUCT_BRAND ?= cyanogenmod
+
+SUPERUSER_EMBEDDED := true
 
 ifneq ($(TARGET_SCREEN_WIDTH) $(TARGET_SCREEN_HEIGHT),$(space))
 # determine the smaller dimension
@@ -61,7 +63,12 @@ PRODUCT_PROPERTY_OVERRIDES += \
     ro.com.android.dataroaming=false
 
 PRODUCT_PROPERTY_OVERRIDES += \
-    ro.build.selinux=1
+    ro.build.selinux=1 \
+    persist.sys.root_access=3
+
+# Disable multithreaded dexopt by default
+PRODUCT_PROPERTY_OVERRIDES += \
+    persist.sys.dalvik.multithread=false
 
 # Thank you, please drive thru!
 PRODUCT_PROPERTY_OVERRIDES += persist.sys.dun.override=0
@@ -99,7 +106,8 @@ PRODUCT_COPY_FILES += \
 
 # CM-specific init file
 PRODUCT_COPY_FILES += \
-    vendor/candy5/prebuilt/common/etc/init.local.rc:root/init.cm.rc
+    vendor/cm/prebuilt/common/etc/init.local.rc:root/init.cm.rc \
+    external/koush/Superuser/init.superuser.rc:root/init.superuser.rc
 
 # Bring in camera effects
 PRODUCT_COPY_FILES +=  \
