@@ -306,24 +306,8 @@ PRODUCT_COPY_FILES += \
 	vendor/cm/prebuilt/etc/hosts.alt:system/etc/hosts.alt \
 	vendor/cm/prebuilt/etc/hosts.og:system/etc/hosts.og
 
-ifeq ($(CM_BUILDTYPE), RELEASE)
-
-    ifndef TARGET_VENDOR_RELEASE_BUILD_ID
-        candy5_VERSION := $(PRODUCT_VERSION_MAJOR).$(PRODUCT_VERSION_MINOR).$(PRODUCT_VERSION_MAINTENANCE)$(PRODUCT_VERSION_DEVICE_SPECIFIC)-$(candy5_BUILD)
-    else
-        ifeq ($(TARGET_BUILD_VARIANT),user)
-            candy5_VERSION := $(PRODUCT_VERSION_MAJOR).$(PRODUCT_VERSION_MINOR)-$(TARGET_VENDOR_RELEASE_BUILD_ID)-$(candy5_BUILD)
-        else
-            candy5_VERSION := $(PRODUCT_VERSION_MAJOR).$(PRODUCT_VERSION_MINOR).$(PRODUCT_VERSION_MAINTENANCE)$(PRODUCT_VERSION_DEVICE_SPECIFIC)-$(candy5_BUILD)
-        endif
-    endif
-else
-    ifeq ($(PRODUCT_VERSION_MINOR),0)
-        candy5_VERSION := $(PRODUCT_VERSION_MAJOR)-$(shell date -u +%Y%m%d)-$(candy5_BUILDTYPE)$(candy5_EXTRAVERSION)-$(candy5_BUILD)
-    else
-        candy5_VERSION := $(PRODUCT_VERSION_MAJOR).$(PRODUCT_VERSION_MINOR)-$(shell date -u +%Y%m%d)-$(candy5_BUILDTYPE)$(candy5_EXTRAVERSION)-$(candy5_BUILD)
-    endif
-endif
+BeanStalk_Version=5.0001
+CM_VERSION := BeanStalk$(BeanStalk_Version)-$(shell date -u +%Y%m%d)-$(CM_BUILD)$(CM_EXTRAVERSION)
 
 PRODUCT_PROPERTY_OVERRIDES += \
   ro.candy5.version=$(candy5_VERSION) \
