@@ -307,7 +307,7 @@ PRODUCT_COPY_FILES += \
 	vendor/cm/prebuilt/etc/hosts.og:system/etc/hosts.og
 
 BeanStalk_Version=5.0001
-CM_VERSION := BeanStalk$(BeanStalk_Version)-$(shell date -u +%Y%m%d)-$(CM_BUILD)$(CM_EXTRAVERSION)
+CM_VERSION := BeanStalk-$(BeanStalk_Version)-$(shell date -u +%Y%m%d)-$(CM_BUILD)$(CM_EXTRAVERSION)
 
 PRODUCT_PROPERTY_OVERRIDES += \
   ro.candy5.version=$(candy5_VERSION) \
