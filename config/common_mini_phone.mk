@@ -1,8 +1,8 @@
-# Inherit common CM stuff
-$(call inherit-product, vendor/candy5/config/common.mk)
+# Inherit common BS stuff
+$(call inherit-product, vendor/beanstalk/config/common.mk)
 
-# Include CM audio files
-include vendor/candy5/config/cm_audio.mk
+# Include audio files
+include vendor/beanstalk/config/bs_audio.mk
 
 # Default notification/alarm sounds
 PRODUCT_PROPERTY_OVERRIDES += \
@@ -11,7 +11,7 @@ PRODUCT_PROPERTY_OVERRIDES += \
 
 ifeq ($(TARGET_SCREEN_WIDTH) $(TARGET_SCREEN_HEIGHT),$(space))
     PRODUCT_COPY_FILES += \
-        vendor/candy5/prebuilt/common/bootanimation/320.zip:system/media/bootanimation.zip
+        vendor/beanstalk/prebuilt/common/bootanimation/320.zip:system/media/bootanimation.zip
 endif
 
-$(call inherit-product, vendor/candy5/config/telephony.mk)
+$(call inherit-product, vendor/beanstalk/config/telephony.mk)

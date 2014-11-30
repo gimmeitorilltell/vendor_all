@@ -1,13 +1,16 @@
-# Inherit common CM stuff
-$(call inherit-product, vendor/candy5/config/common.mk)
+# Inherit common BS stuff
+$(call inherit-product, vendor/beanstalk/config/common.mk)
 
-# Include CM audio files
-include vendor/candy5/config/cm_audio.mk
+# Bring in all video files
+$(call inherit-product, frameworks/base/data/videos/VideoPackage2.mk)
 
-# Include CM LatinIME dictionaries
-PRODUCT_PACKAGE_OVERLAYS += vendor/candy5/overlay/dictionaries
+# Include audio files
+include vendor/beanstalk/config/bs_audio.mk
 
-# Optional CM packages
+# Include LatinIME dictionaries
+PRODUCT_PACKAGE_OVERLAYS += vendor/beanstalk/overlay/dictionaries
+
+# Optional packages
 PRODUCT_PACKAGES += \
     Galaxy4 \
     HoloSpiralWallpaper \
@@ -21,7 +24,15 @@ PRODUCT_PACKAGES += \
     SoundRecorder \
     PhotoPhase
 
-# Extra tools in CM
+PRODUCT_PACKAGES += \
+    VideoEditor \
+    libvideoeditor_jni \
+    libvideoeditor_core \
+    libvideoeditor_osal \
+    libvideoeditor_videofilters \
+    libvideoeditorplayer
+
+# Extra tools
 PRODUCT_PACKAGES += \
     vim \
     zip \

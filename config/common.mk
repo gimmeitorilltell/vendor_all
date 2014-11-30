@@ -1,4 +1,4 @@
-PRODUCT_BRAND ?= cyanogenmod
+PRODUCT_BRAND ?= beanstalk
 
 ifneq ($(TARGET_SCREEN_WIDTH) $(TARGET_SCREEN_HEIGHT),$(space))
 # determine the smaller dimension
@@ -10,7 +10,7 @@ TARGET_BOOTANIMATION_SIZE := $(shell \
   fi )
 
 # get a sorted list of the sizes
-bootanimation_sizes := $(subst .zip,, $(shell ls vendor/candy5/prebuilt/common/bootanimation))
+bootanimation_sizes := $(subst .zip,, $(shell ls vendor/beanstalk/prebuilt/common/bootanimation))
 bootanimation_sizes := $(shell echo -e $(subst $(space),'\n',$(bootanimation_sizes)) | sort -rn)
 
 # find the appropriate size and set
@@ -26,20 +26,11 @@ $(eval TARGET_BOOTANIMATION_NAME := $(shell \
 endef
 $(foreach size,$(bootanimation_sizes), $(call check_and_set_bootanimation,$(size)))
 
-ifeq ($(TARGET_BOOTANIMATION_HALF_RES),true)
-PRODUCT_BOOTANIMATION := vendor/candy5/prebuilt/common/bootanimation/halfres/$(TARGET_BOOTANIMATION_NAME).zip
-else
-PRODUCT_BOOTANIMATION := vendor/candy5/prebuilt/common/bootanimation/$(TARGET_BOOTANIMATION_NAME).zip
-endif
+PRODUCT_BOOTANIMATION := vendor/beanstalk/prebuilt/common/bootanimation/$(TARGET_BOOTANIMATION_NAME).zip
 endif
 
-ifdef candy5_NIGHTLY
 PRODUCT_PROPERTY_OVERRIDES += \
-    ro.rommanager.developerid=candy5nightly
-else
-PRODUCT_PROPERTY_OVERRIDES += \
-    ro.rommanager.developerid=candy5
-endif
+    ro.rommanager.developerid=beanstalk
 
 PRODUCT_BUILD_PROP_OVERRIDES += BUILD_UTC_DATE=0
 
@@ -75,40 +66,36 @@ ifneq ($(TARGET_BUILD_VARIANT),eng)
 ADDITIONAL_DEFAULT_PROPERTIES += ro.adb.secure=1
 endif
 
-# Copy over the changelog to the device
-PRODUCT_COPY_FILES += \
-    vendor/candy5/CHANGELOG.mkdn:system/etc/CHANGELOG-CM.txt
-
 # Backup Tool
 ifneq ($(WITH_GMS),true)
 PRODUCT_COPY_FILES += \
-    vendor/candy5/prebuilt/common/bin/backuptool.sh:install/bin/backuptool.sh \
-    vendor/candy5/prebuilt/common/bin/backuptool.functions:install/bin/backuptool.functions \
-    vendor/candy5/prebuilt/common/bin/50-cm.sh:system/addon.d/50-cm.sh \
-    vendor/candy5/prebuilt/common/bin/blacklist:system/addon.d/blacklist
+    vendor/beanstalk/prebuilt/common/bin/backuptool.sh:system/bin/backuptool.sh \
+    vendor/beanstalk/prebuilt/common/bin/backuptool.functions:system/bin/backuptool.functions \
+    vendor/beanstalk/prebuilt/common/bin/50-cm.sh:system/addon.d/50-cm.sh \
+    vendor/beanstalk/prebuilt/common/bin/blacklist:system/addon.d/blacklist
 endif
 
 # Signature compatibility validation
 PRODUCT_COPY_FILES += \
-    vendor/candy5/prebuilt/common/bin/otasigcheck.sh:install/bin/otasigcheck.sh
+    vendor/beanstalk/prebuilt/common/bin/otasigcheck.sh:system/bin/otasigcheck.sh
 
 # init.d support
 PRODUCT_COPY_FILES += \
-    vendor/candy5/prebuilt/common/etc/init.d/00banner:system/etc/init.d/00banner \
-    vendor/candy5/prebuilt/common/bin/sysinit:system/bin/sysinit
+    vendor/beanstalk/prebuilt/common/etc/init.d/00banner:system/etc/init.d/00banner \
+    vendor/beanstalk/prebuilt/common/bin/sysinit:system/bin/sysinit
 
 # userinit support
 PRODUCT_COPY_FILES += \
-    vendor/candy5/prebuilt/common/etc/init.d/90userinit:system/etc/init.d/90userinit
+    vendor/beanstalk/prebuilt/common/etc/init.d/90userinit:system/etc/init.d/90userinit
 
 # CM-specific init file
 PRODUCT_COPY_FILES += \
-    vendor/cm/prebuilt/common/etc/init.local.rc:root/init.cm.rc
+    vendor/beanstalk/prebuilt/common/etc/init.local.rc:root/init.cm.rc
 
 # Bring in camera effects
 PRODUCT_COPY_FILES +=  \
-    vendor/candy5/prebuilt/common/media/LMprec_508.emd:system/media/LMprec_508.emd \
-    vendor/candy5/prebuilt/common/media/PFFprec_600.emd:system/media/PFFprec_600.emd
+    vendor/beanstalk/prebuilt/common/media/LMprec_508.emd:system/media/LMprec_508.emd \
+    vendor/beanstalk/prebuilt/common/media/PFFprec_600.emd:system/media/PFFprec_600.emd
 
 # Enable SIP+VoIP on all targets
 PRODUCT_COPY_FILES += \
@@ -120,12 +107,12 @@ PRODUCT_COPY_FILES += \
 
 # This is CM!
 PRODUCT_COPY_FILES += \
-    vendor/candy5/config/permissions/com.cyanogenmod.android.xml:system/etc/permissions/com.cyanogenmod.android.xml
+    vendor/beanstalk/config/permissions/com.cyanogenmod.android.xml:system/etc/permissions/com.cyanogenmod.android.xml
 
 # T-Mobile theme engine
-include vendor/candy5/config/themes_common.mk
+include vendor/beanstalk/config/themes_common.mk
 
-# Required CM packages
+# Required packages
 PRODUCT_PACKAGES += \
     Development \
     LatinIME \
@@ -133,22 +120,22 @@ PRODUCT_PACKAGES += \
 
 # Viper4Android
 PRODUCT_COPY_FILES += \
-    vendor/cm/prebuilt/common/etc/viper4android/viper4android.apk:system/app/Viper4Android/viper4android.apk
+    vendor/beanstalk/prebuilt/common/etc/viper4android/viper4android.apk:system/app/Viper4Android/viper4android.apk
 
 # SuperSU
 PRODUCT_COPY_FILES += \
-    vendor/cm/prebuilt/common/UPDATE-SuperSU.zip:system/addon.d/UPDATE-SuperSU.zip \
-    vendor/cm/prebuilt/common/etc/init.d/99SuperSUDaemon:system/etc/init.d/99SuperSUDaemon
+    vendor/beanstalk/prebuilt/common/UPDATE-SuperSU.zip:system/addon.d/UPDATE-SuperSU.zip \
+    vendor/beanstalk/prebuilt/common/etc/init.d/99SuperSUDaemon:system/etc/init.d/99SuperSUDaemon
 
 # Copy latinime for gesture typing
 PRODUCT_COPY_FILES += \
-    vendor/cm/prebuilt/common/lib/libjni_latinimegoogle.so:system/lib/libjni_latinimegoogle.so
+    vendor/beanstalk/prebuilt/common/lib/libjni_latinimegoogle.so:system/lib/libjni_latinimegoogle.so
 
 # Custom BeanStalk packages
 PRODUCT_PACKAGES += \
     BeanStalkPapers
 
-# Optional CM packages
+# Optional packages
 PRODUCT_PACKAGES += \
     VoicePlus \
     Basic \
@@ -158,7 +145,7 @@ PRODUCT_PACKAGES += \
 PRODUCT_PACKAGES += \
     OmniSwitch
 
-# Custom CM packages
+# Custom packages
 PRODUCT_PACKAGES += \
     Launcher3 \
     Trebuchet \
@@ -168,7 +155,6 @@ PRODUCT_PACKAGES += \
     DSPManager \
     libcyanogen-dsp \
     audio_effects.conf \
-    CMWallpapers \
     Apollo \
     CMFileManager \
     LockClock \
@@ -181,7 +167,7 @@ PRODUCT_PACKAGES += \
     org.cyanogenmod.hardware \
     org.cyanogenmod.hardware.xml
 
-# Extra tools in CM
+# Extra tools
 PRODUCT_PACKAGES += \
     libsepol \
     e2fsck \
@@ -227,126 +213,42 @@ PRODUCT_PACKAGES += \
     libFFmpegExtractor \
     libnamparser
 
-# These packages are excluded from user builds
-ifneq ($(TARGET_BUILD_VARIANT),user)
-
 PRODUCT_PACKAGES += \
     procmem \
     procrank \
     su
 
-PRODUCT_PROPERTY_OVERRIDES += \
-    persist.sys.root_access=1
-else
-
-PRODUCT_PROPERTY_OVERRIDES += \
-    persist.sys.root_access=0
-
-PRODUCT_PROPERTY_OVERRIDES += \
-    persist.sys.root_access=1
-else
+# Terminal Emulator
+PRODUCT_COPY_FILES +=  \
+    vendor/beanstalk/proprietary/Term.apk:system/app/Term/Term.apk \
+    vendor/beanstalk/proprietary/lib/armeabi/libjackpal-androidterm4.so:system/app/Term/lib/arm/libjackpal-androidterm4.so
 
 PRODUCT_PROPERTY_OVERRIDES += \
     persist.sys.root_access=1
 
-endif
-
-PRODUCT_PACKAGE_OVERLAYS += vendor/candy5/overlay/common
-
-PRODUCT_VERSION_MAJOR = Release
-PRODUCT_VERSION_MINOR = v1.5.2
-PRODUCT_VERSION_MAINTENANCE = v1.5.2
-
-# Set CM_BUILDTYPE from the env RELEASE_TYPE, for jenkins compat
-
-ifndef candy5_BUILDTYPE
-    ifdef RELEASE_TYPE
-        # Starting with "CM_" is optional
-        RELEASE_TYPE := $(shell echo $(RELEASE_TYPE) | sed -e 's|^candy5_||g')
-        candy5_BUILDTYPE := $(RELEASE_TYPE)
-    endif
-endif
-
-# Filter out random types, so it'll reset to UNOFFICIAL
-ifeq ($(filter RELEASE NIGHTLY SNAPSHOT EXPERIMENTAL,$(candy5_BUILDTYPE)),)
-    candy5_BUILDTYPE :=
-endif
-
-ifdef candy5_BUILDTYPE
-    ifneq ($(candy5_BUILDTYPE), SNAPSHOT)
-        ifdef candy5_EXTRAVERSION
-            # Force build type to EXPERIMENTAL
-            candy5_BUILDTYPE := EXPERIMENTAL
-            # Remove leading dash from CM_EXTRAVERSION
-            candy5_EXTRAVERSION := $(shell echo $(candy5_EXTRAVERSION) | sed 's/-//')
-            # Add leading dash to CM_EXTRAVERSION
-            candy5_EXTRAVERSION := -$(candy5_EXTRAVERSION)
-        endif
-    else
-        ifndef candy5_EXTRAVERSION
-            # Force build type to EXPERIMENTAL, SNAPSHOT mandates a tag
-            candy5_BUILDTYPE := EXPERIMENTAL
-        else
-            # Remove leading dash from CM_EXTRAVERSION
-            candy5_EXTRAVERSION := $(shell echo $(candy5_EXTRAVERSION) | sed 's/-//')
-            # Add leading dash to CM_EXTRAVERSION
-            candy5_EXTRAVERSION := -$(candy5_EXTRAVERSION)
-        endif
-    endif
-else
-    # If CM_BUILDTYPE is not defined, set to UNOFFICIAL
-    candy5_BUILDTYPE := OFFICIAL
-    candy5_EXTRAVERSION :=
-endif
-
-ifeq ($(candy5_BUILDTYPE), OFFICIAL)
-    ifneq ($(TARGET_OFFICIAL_BUILD_ID),)
-        candy5_EXTRAVERSION := -$(TARGET_OFFICIAL_BUILD_ID)
-    endif
-endif
+PRODUCT_PACKAGE_OVERLAYS += vendor/beanstalk/overlay/common
 
 # HFM Files
 PRODUCT_COPY_FILES += \
-	vendor/cm/prebuilt/etc/hosts.alt:system/etc/hosts.alt \
-	vendor/cm/prebuilt/etc/hosts.og:system/etc/hosts.og
+	vendor/beanstalk/prebuilt/etc/hosts.alt:system/etc/hosts.alt \
+	vendor/beanstalk/prebuilt/etc/hosts.og:system/etc/hosts.og
 
 BeanStalk_Version=5.0001
-CM_VERSION := BeanStalk-$(BeanStalk_Version)-$(shell date -u +%Y%m%d)-$(CM_BUILD)$(CM_EXTRAVERSION)
+BS_VERSION := BeanStalk-$(BeanStalk_Version)-$(shell date -u +%Y%m%d)-$(BS_BUILD)
 
 PRODUCT_PROPERTY_OVERRIDES += \
-  ro.candy5.version=$(candy5_VERSION) \
-  ro.candy5.releasetype=$(candy5_BUILDTYPE) \
-  ro.modversion=$(candy5_VERSION) \
-  ro.cmlegal.url=https://cyngn.com/legal/privacy-policy
+  ro.bs.version=$(BS_VERSION) \
+  ro.modversion=$(BS_VERSION)
 
--include vendor/candy5-priv/keys/keys.mk
+-include vendor/beanstalk/keys/keys.mk
 
-candy5_DISPLAY_VERSION := $(candy5_VERSION)
-
-ifneq ($(PRODUCT_DEFAULT_DEV_CERTIFICATE),)
-ifneq ($(PRODUCT_DEFAULT_DEV_CERTIFICATE),build/target/product/security/testkey)
-  ifneq ($(candy5_BUILDTYPE), OFFICIAL)
-    ifndef TARGET_VENDOR_RELEASE_BUILD_ID
-      ifneq ($(candy5_EXTRAVERSION),)
-        # Remove leading dash from CM_EXTRAVERSION
-        candy5_EXTRAVERSION := $(shell echo $(candy5_EXTRAVERSION) | sed 's/-//')
-        TARGET_VENDOR_RELEASE_BUILD_ID := $(candy5_EXTRAVERSION)
-      else
-        TARGET_VENDOR_RELEASE_BUILD_ID := $(shell date -u +%Y%m%d)
-      endif
-    else
-      TARGET_VENDOR_RELEASE_BUILD_ID := $(TARGET_VENDOR_RELEASE_BUILD_ID)
-    endif
-    candy5_DISPLAY_VERSION=$(PRODUCT_VERSION_MAJOR).$(PRODUCT_VERSION_MINOR)-$(TARGET_VENDOR_RELEASE_BUILD_ID)
-  endif
-endif
-endif
+BS_DISPLAY_VERSION := $(BS_VERSION)
 
 # by default, do not update the recovery with system updates
 PRODUCT_PROPERTY_OVERRIDES += persist.sys.recovery_update=false
 
 PRODUCT_PROPERTY_OVERRIDES += \
-  ro.candy5.display.version=$(candy5_DISPLAY_VERSION)
+  ro.bs.display.version=$(BS_DISPLAY_VERSION)
 
 -include $(WORKSPACE)/build_env/image-auto-bits.mk
 

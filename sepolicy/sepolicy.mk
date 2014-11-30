@@ -4,7 +4,11 @@
 #
 
 BOARD_SEPOLICY_DIRS += \
+<<<<<<< HEAD
     vendor/candy5/sepolicy
+=======
+    vendor/beanstalk/sepolicy
+>>>>>>> 373bd90... Change from CM naming to BeanStalk.  Long Overdue.
 
 BOARD_SEPOLICY_UNION += \
     file.te \
