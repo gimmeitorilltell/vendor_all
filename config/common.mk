@@ -157,10 +157,7 @@ PRODUCT_PACKAGES += \
     audio_effects.conf \
     Apollo \
     CMFileManager \
-    LockClock \
-    CMUpdater \
-    CMAccount \
-    CMHome
+    LockClock
 
 # CM Hardware Abstraction Framework
 PRODUCT_PACKAGES += \
