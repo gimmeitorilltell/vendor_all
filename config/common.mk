@@ -151,11 +151,6 @@ PRODUCT_PACKAGES += \
     Trebuchet \
     AudioFX \
     Eleven \
-    LockClock   
-    DSPManager \
-    libcyanogen-dsp \
-    audio_effects.conf \
-    Apollo \
     CMFileManager \
     LockClock
 
