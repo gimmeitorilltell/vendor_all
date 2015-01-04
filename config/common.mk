@@ -139,11 +139,8 @@ PRODUCT_PACKAGES += \
 PRODUCT_PACKAGES += \
     VoicePlus \
     Basic \
-    libemoji
-    
-# Omni Apps
-PRODUCT_PACKAGES += \
-    OmniSwitch
+    libemoji \
+    Terminal
 
 # Custom packages
 PRODUCT_PACKAGES += \
