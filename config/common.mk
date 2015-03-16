@@ -87,7 +87,7 @@ PRODUCT_COPY_FILES += \
 
 # MK-specific init files
 PRODUCT_COPY_FILES += \
-    vendor/mk/prebuilt/common/etc/init.local.rc:root/init.mk.rc
+    vendor/mk/prebuilt/common/etc/init.d/90userinit:system/etc/init.d/90userinit
 
 # MK-specific prebuilt files
 PRODUCT_COPY_FILES += \
