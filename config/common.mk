@@ -1,8 +1,5 @@
 PRODUCT_BRAND ?= mokee
 
-MOKEEHELPER_EMBEDDED := true
-MOKEEHELPER_PACKAGE_PREFIX := com.android.settings.mokee.mokeehelper
-
 ifneq ($(TARGET_SCREEN_WIDTH) $(TARGET_SCREEN_HEIGHT),$(space))
 # determine the smaller dimension
 TARGET_BOOTANIMATION_SIZE := $(shell \
@@ -116,24 +113,6 @@ PRODUCT_COPY_FILES += $(shell test -d vendor/mk/prebuilt/$(DEVELOPER_MAINTAINER)
 PRODUCT_COPY_FILES += $(shell test -d vendor/mk/prebuilt/third/app && \
     find vendor/mk/prebuilt/third/app -name '*.apk' \
     -printf '%p:system/third-app/%f ')
-
-# Google Intl
-ifneq ($(TARGET_EXCLUDE_GOOGLE_IME),true)
-PRODUCT_COPY_FILES += $(shell test -d vendor/mk/prebuilt/google/app/GoogleIntl && \
-    find vendor/mk/prebuilt/google/app/GoogleIntl -name '*.apk' \
-    -printf '%p:system/app/GoogleIntl/%f ')
-PRODUCT_COPY_FILES += $(shell test -d vendor/mk/prebuilt/google/app/GoogleIntl && \
-    find vendor/mk/prebuilt/google/app/GoogleIntl -name '*.so' \
-    -printf '%p:system/app/GoogleIntl/lib/arm/%f ')
-endif
-
-# Google PinYin
-PRODUCT_COPY_FILES += $(shell test -d vendor/mk/prebuilt/google/app/GooglePinYin && \
-    find vendor/mk/prebuilt/google/app/GooglePinYin -name '*.apk' \
-    -printf '%p:system/app/GooglePinYin/%f ')
-PRODUCT_COPY_FILES += $(shell test -d vendor/mk/prebuilt/google/app/GooglePinYin && \
-    find vendor/mk/prebuilt/google/app/GooglePinYin -name '*.so' \
-    -printf '%p:system/app/GooglePinYin/lib/arm/%f ')
 
 # Bring in camera effects
 PRODUCT_COPY_FILES +=  \
