@@ -201,7 +201,7 @@ PRODUCT_PACKAGES += \
 
 PRODUCT_PACKAGES += \
     procmem \
-    procrank \
+    procrank
 
 PRODUCT_PROPERTY_OVERRIDES += \
     persist.sys.root_access=1
