@@ -54,10 +54,6 @@ PRODUCT_PROPERTY_OVERRIDES += \
 PRODUCT_PROPERTY_OVERRIDES += \
     ro.build.selinux=1
 
-# Disable multithreaded dexopt by default
-PRODUCT_PROPERTY_OVERRIDES += \
-    persist.sys.dalvik.multithread=false
-
 # Thank you, please drive thru!
 PRODUCT_PROPERTY_OVERRIDES += persist.sys.dun.override=0
 
@@ -206,12 +202,6 @@ PRODUCT_PACKAGES += \
 PRODUCT_PACKAGES += \
     procmem \
     procrank \
-    su
-
-# Terminal Emulator
-PRODUCT_COPY_FILES +=  \
-    vendor/beanstalk/proprietary/Term.apk:system/app/Term/Term.apk \
-    vendor/beanstalk/proprietary/lib/armeabi/libjackpal-androidterm4.so:system/app/Term/lib/arm/libjackpal-androidterm4.so
 
 PRODUCT_PROPERTY_OVERRIDES += \
     persist.sys.root_access=1
@@ -230,7 +220,7 @@ PRODUCT_PROPERTY_OVERRIDES += \
   ro.bs.version=$(BS_VERSION) \
   ro.modversion=$(BS_VERSION)
 
--include vendor/beanstalk/keys/keys.mk
+-include vendor/cm-priv/keys/keys.mk
 
 BS_DISPLAY_VERSION := $(BS_VERSION)
 
