@@ -39,7 +39,6 @@
   <device name="jfltecan"/>
   <device name="jfltespr"/>
   <device name="jfltetmo"/>
-  <device name="jflteusc"/>
   <device name="jfltevzw"/>
   <device name="jfltexx"/>
   <!-- <device name="ls980"/> -->
@@ -52,15 +51,13 @@
   <!-- <device name="moto_msm8960_jbbl"/> -->
   <device name="n5100"/>
   <device name="n5110"/>
-  <device name="obake"/>
-  <!-- <device name="n5120"/> -->
+  <device name="n5120"/>
   <device name="serrano3gxx"/>
+  <device name="serranodsdd"/>
   <device name="serranoltexx"/>
   <device name="shamu"/>
   <device name="spyder"/>
   <device name="titan"/>
-  <device name="trltespr"/>
-  <device name="trltetmo"/>
   <device name="v500"/>
   <!-- <device name="wx_na_do"/> -->
 </manifest>
