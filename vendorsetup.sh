@@ -94,6 +94,7 @@ add_lunch_combo pac_n5100-userdebug
 add_lunch_combo pac_n5110-userdebug
 add_lunch_combo pac_n5120-userdebug
 add_lunch_combo pac_n7100-userdebug
+add_lunch_combo pac_quincyatt-userdebug
 add_lunch_combo pac_r950-userdebug
 add_lunch_combo pac_s2ve-userdebug
 add_lunch_combo pac_s2vep-userdebug
