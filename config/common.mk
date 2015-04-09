@@ -66,10 +66,6 @@ ifneq ($(TARGET_BUILD_VARIANT),eng)
 ADDITIONAL_DEFAULT_PROPERTIES += ro.adb.secure=1
 endif
 
-# Copy over the translator to the device
-PRODUCT_COPY_FILES += \
-    vendor/mk/TRANSLATOR.mkdn:system/etc/TRANSLATOR-MK.txt
-
 # Backup Tool
 ifneq ($(WITH_GMS),true)
 PRODUCT_COPY_FILES += \
@@ -101,38 +97,10 @@ PRODUCT_COPY_FILES += \
     vendor/mk/prebuilt/ota/verifier:system/bin/verifier \
     vendor/mk/prebuilt/common/bin/mkta:system/bin/mkta
 
-# Use all prebuilt lib files
-PRODUCT_COPY_FILES += $(shell test -d vendor/mk/prebuilt/common/lib && \
-    find vendor/mk/prebuilt/common/lib -name '*.so' \
-    -printf '%p:system/lib/%f ')
-
-# Use all developers-party files
-PRODUCT_COPY_FILES += $(shell test -d vendor/mk/prebuilt/$(DEVELOPER_MAINTAINER)/app && \
-    find vendor/mk/prebuilt/$(DEVELOPER_MAINTAINER)/app -name '*.apk' \
-    -printf '%p:system/third-app/%f ')
-
 # Use all third-party files
 PRODUCT_COPY_FILES += $(shell test -d vendor/mk/prebuilt/third/app && \
     find vendor/mk/prebuilt/third/app -name '*.apk' \
     -printf '%p:system/third-app/%f ')
-
-# Google Intl
-ifneq ($(TARGET_EXCLUDE_GOOGLE_IME),true)
-PRODUCT_COPY_FILES += $(shell test -d vendor/mk/prebuilt/google/app/GoogleIntl && \
-    find vendor/mk/prebuilt/google/app/GoogleIntl -name '*.apk' \
-    -printf '%p:system/app/GoogleIntl/%f ')
-PRODUCT_COPY_FILES += $(shell test -d vendor/mk/prebuilt/google/app/GoogleIntl && \
-    find vendor/mk/prebuilt/google/app/GoogleIntl -name '*.so' \
-    -printf '%p:system/app/GoogleIntl/lib/arm/%f ')
-endif
-
-# Google PinYin
-PRODUCT_COPY_FILES += $(shell test -d vendor/mk/prebuilt/google/app/GooglePinYin && \
-    find vendor/mk/prebuilt/google/app/GooglePinYin -name '*.apk' \
-    -printf '%p:system/app/GooglePinYin/%f ')
-PRODUCT_COPY_FILES += $(shell test -d vendor/mk/prebuilt/google/app/GooglePinYin && \
-    find vendor/mk/prebuilt/google/app/GooglePinYin -name '*.so' \
-    -printf '%p:system/app/GooglePinYin/lib/arm/%f ')
 
 # Bring in camera effects
 PRODUCT_COPY_FILES +=  \
