@@ -144,6 +144,7 @@ PRODUCT_PROPERTY_OVERRIDES += \
 
 PRODUCT_PACKAGES += \
     Launcher3 \
+    Trebuchet \
     AudioFX \
     CMFileManager \
     Eleven \
