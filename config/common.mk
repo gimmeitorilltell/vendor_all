@@ -144,13 +144,10 @@ PRODUCT_PROPERTY_OVERRIDES += \
 
 PRODUCT_PACKAGES += \
     Launcher3 \
-    MoKeeLauncher \
     AudioFX \
     CMFileManager \
     Eleven \
-    LockClock \
-    MoKeeHelper \
-    MoKeeSetupWizard \
+    LockClock
 
 # MK Hardware Abstraction Framework
 PRODUCT_PACKAGES += \
