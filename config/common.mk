@@ -1,8 +1,5 @@
 PRODUCT_BRAND ?= mokee
 
-MOKEEHELPER_EMBEDDED := true
-MOKEEHELPER_PACKAGE_PREFIX := com.android.settings.mokee.mokeehelper
-
 ifneq ($(TARGET_SCREEN_WIDTH) $(TARGET_SCREEN_HEIGHT),$(space))
 # determine the smaller dimension
 TARGET_BOOTANIMATION_SIZE := $(shell \
